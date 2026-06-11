@@ -6,6 +6,7 @@
   <meta name="description" content="Flix Solutions — Servidores IPTV, apps Android, bots de Telegram, automatizaciones Python y más." />
   <title>Flix Solutions — Soluciones Técnicas Profesionales</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="animations.css" />
 </head>
 <body>
 
@@ -29,16 +30,16 @@
     <div class="hero__inner">
 
       <div class="hero__left">
-        <div class="hero__eyebrow">Servicios técnicos profesionales</div>
-        <h1 class="hero__title">
+        <div class="hero__eyebrow anim-fade-up" style="--delay:0ms">Servicios técnicos profesionales</div>
+        <h1 class="hero__title anim-fade-up" style="--delay:120ms">
           Soluciones digitales<br>
-          que <span class="accent">realmente<br>funcionan</span>
+          que <span class="accent typewriter" id="typewriter"></span>
         </h1>
-        <p class="hero__sub">
+        <p class="hero__sub anim-fade-up" style="--delay:260ms">
           IPTV, apps Android, bots, automatizaciones y más.
           Entrego rápido, con código limpio y resultados reales.
         </p>
-        <div class="hero__cta-group">
+        <div class="hero__cta-group anim-fade-up" style="--delay:380ms">
           <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
             <i class="ti ti-send" aria-hidden="true"></i> Solicitar servicio
           </button>
@@ -48,14 +49,14 @@
         </div>
       </div>
 
-      <div class="hero__right">
+      <div class="hero__right anim-fade-up" style="--delay:200ms">
         <div class="hero__stat-grid">
           <div class="stat-card">
-            <div class="stat-card__num">8+</div>
+            <div class="stat-card__num counter" data-target="8" data-suffix="+">0+</div>
             <div class="stat-card__label">Servicios técnicos disponibles</div>
           </div>
           <div class="stat-card">
-            <div class="stat-card__num">48h</div>
+            <div class="stat-card__num counter" data-target="48" data-suffix="h">0h</div>
             <div class="stat-card__label">Entrega promedio de landing pages</div>
           </div>
           <div class="stat-card">
@@ -63,19 +64,19 @@
             <div class="stat-card__label">Disponibilidad para consultas</div>
           </div>
           <div class="stat-card">
-            <div class="stat-card__num">100%</div>
+            <div class="stat-card__num counter" data-target="100" data-suffix="%">0%</div>
             <div class="stat-card__label">Código propio, sin templates</div>
           </div>
         </div>
         <div class="hero__tech-strip">
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">Bash</span>
-          <span class="tech-pill">Android</span>
-          <span class="tech-pill">Telegram API</span>
-          <span class="tech-pill">Linux / VPS</span>
-          <span class="tech-pill">IPTV / M3U</span>
-          <span class="tech-pill">HTML · CSS · JS</span>
-          <span class="tech-pill">REST APIs</span>
+          <span class="tech-pill anim-pop" style="--delay:500ms">Python</span>
+          <span class="tech-pill anim-pop" style="--delay:560ms">Bash</span>
+          <span class="tech-pill anim-pop" style="--delay:620ms">Android</span>
+          <span class="tech-pill anim-pop" style="--delay:680ms">Telegram API</span>
+          <span class="tech-pill anim-pop" style="--delay:740ms">Linux / VPS</span>
+          <span class="tech-pill anim-pop" style="--delay:800ms">IPTV / M3U</span>
+          <span class="tech-pill anim-pop" style="--delay:860ms">HTML · CSS · JS</span>
+          <span class="tech-pill anim-pop" style="--delay:920ms">REST APIs</span>
         </div>
       </div>
 
@@ -90,13 +91,13 @@
   <section class="services-section" id="servicios">
     <div class="section-header">
       <span class="section-label">// servicios</span>
-      <h2 class="section-title">¿Qué puedo hacer por tí?</h2>
+      <h2 class="section-title">¿Qué puedo hacer por vos?</h2>
     </div>
 
     <div class="services-grid">
 
       <!-- IPTV -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-device-tv" aria-hidden="true"></i></div>
           <div class="service-card__title">Servidores IPTV</div>
@@ -114,7 +115,7 @@
       </div>
 
       <!-- Android -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-brand-android" aria-hidden="true"></i></div>
           <div class="service-card__title">Aplicaciones Android</div>
@@ -132,7 +133,7 @@
       </div>
 
       <!-- Código -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-code" aria-hidden="true"></i></div>
           <div class="service-card__title">Corrección de código</div>
@@ -150,7 +151,7 @@
       </div>
 
       <!-- Bots -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-brand-telegram" aria-hidden="true"></i></div>
           <div class="service-card__title">Bots de Telegram</div>
@@ -168,7 +169,7 @@
       </div>
 
       <!-- Servidores -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-server-bolt" aria-hidden="true"></i></div>
           <div class="service-card__title">Optimización de servidores</div>
@@ -186,7 +187,7 @@
       </div>
 
       <!-- Landing -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-layout-dashboard" aria-hidden="true"></i></div>
           <div class="service-card__title">Landing Pages</div>
@@ -204,7 +205,7 @@
       </div>
 
       <!-- Scripts -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-file-code" aria-hidden="true"></i></div>
           <div class="service-card__title">Venta de scripts</div>
@@ -222,7 +223,7 @@
       </div>
 
       <!-- Python -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card__header">
           <div class="service-card__icon"><i class="ti ti-brand-python" aria-hidden="true"></i></div>
           <div class="service-card__title">Automatizaciones Python</div>
