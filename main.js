@@ -1,7 +1,145 @@
 /* =============================================
    FLIX SOLUTIONS — main.js
-   Funciones: navegación suave + modales de demo
+   Funciones: animaciones + modales de demo
 ============================================= */
+
+/* ============================================
+   1. TYPEWRITER — rota entre frases en el hero
+============================================= */
+const PHRASES = [
+  "realmente funcionan.",
+  "entregan rápido.",
+  "usan código limpio.",
+  "escalan sin problemas.",
+  "marcan la diferencia.",
+];
+
+function runTypewriter() {
+  const el = document.getElementById("typewriter");
+  if (!el) return;
+
+  let phraseIndex = 0;
+  let charIndex   = 0;
+  let deleting    = false;
+  const SPEED_TYPE   = 55;
+  const SPEED_DELETE = 28;
+  const PAUSE_END    = 1800;
+  const PAUSE_START  = 300;
+
+  function tick() {
+    const phrase = PHRASES[phraseIndex];
+
+    if (!deleting) {
+      el.textContent = phrase.slice(0, charIndex + 1);
+      charIndex++;
+      if (charIndex === phrase.length) {
+        el.classList.add("done");
+        setTimeout(() => {
+          el.classList.remove("done");
+          deleting = true;
+          tick();
+        }, PAUSE_END);
+        return;
+      }
+    } else {
+      el.textContent = phrase.slice(0, charIndex - 1);
+      charIndex--;
+      if (charIndex === 0) {
+        deleting = false;
+        phraseIndex = (phraseIndex + 1) % PHRASES.length;
+        setTimeout(tick, PAUSE_START);
+        return;
+      }
+    }
+
+    setTimeout(tick, deleting ? SPEED_DELETE : SPEED_TYPE);
+  }
+
+  // Arrancar con un pequeño delay para que el fade-up del hero termine primero
+  setTimeout(tick, 700);
+}
+
+/* ============================================
+   2. COUNTER — números que cuentan desde 0
+============================================= */
+function animateCounter(el) {
+  const target  = parseInt(el.dataset.target, 10);
+  const suffix  = el.dataset.suffix || "";
+  const duration = 1400; // ms
+  const start    = performance.now();
+
+  function step(now) {
+    const elapsed  = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // easeOutExpo
+    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const value  = Math.round(eased * target);
+    el.textContent = value + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      el.textContent = target + suffix;
+      el.classList.add("done");
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+/* ============================================
+   3. INTERSECTION OBSERVER — scroll reveal
+============================================= */
+function initScrollReveal() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  // Service cards con delay escalonado
+  document.querySelectorAll(".reveal").forEach((el, i) => {
+    el.style.transitionDelay = `${i * 60}ms`;
+    observer.observe(el);
+  });
+
+  // Contact features con delay escalonado
+  document.querySelectorAll(".contact-feature").forEach((el, i) => {
+    el.style.transitionDelay = `${i * 100}ms`;
+    observer.observe(el);
+  });
+
+  // Counters: arrancan cuando la stat-card entra en vista
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll(".counter").forEach((el) => counterObserver.observe(el));
+}
+
+/* ============================================
+   4. INIT al cargar la página
+============================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  runTypewriter();
+  initScrollReveal();
+});
+
+
 
 /* ---- Datos de demos por servicio ---- */
 const demos = {
